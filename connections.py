@@ -9,9 +9,7 @@ from flask import Flask, jsonify, render_template
 
 #cloud mongo connect
 cloudMClnt = MongoClient()
-cloudMClnt = MongoClient("mongodb+srv://" + mongo_username + ":" + mongo_password + "@cluster0.qvz5m.mongodb.net/<dbname>?retryWrites=true&w=majority")
-#GET ABOVE FROM MONGO ATLAS ON THE WEBSITE. Create a cluster, then do connect > connect your app > copy the link
-# create your own config file with mongo_username = and mongo_password =   
+cloudMClnt = MongoClient("mongodb+srv://" + mongo_username + ":" + mongo_password + "@techdata.hvqxz.mongodb.net/<dbname>?retryWrites=true&w=majority")
 
 def cloud_collection(database, collection):
     # Read mongo database 
@@ -27,7 +25,7 @@ def load_csv(filename,database,collection):
 
     # Read CSV to pandas dataframe
     db_df = pd.read_csv(filename, header=0)
-    
+
     # Convert pandas dataframe to json
     json_data = db_df.to_dict('records')
 
@@ -40,7 +38,7 @@ def readMongoCloud(database,collection):
     db_c = cloud_collection(database,collection)
 
     # Read collection to a pandas dataframe
-    db_df = pd.DataFrame(list(db_c.find().sort([ #this might have to be changed according to the df you have
+    db_df = pd.DataFrame(list(db_c.find().sort([
         ('ID',1)
     ])))
 
@@ -48,5 +46,4 @@ def readMongoCloud(database,collection):
     return db_df
 
 # # Run to load data
-# load_csv('data/SORTED CITIES CSV/San_Francisco.csv',"Real_Estate", "San_Fran") 
-#UNCOMMENT LINE 51 AND EDIT EVERYTHING ACCORDING TO WHAT YOU HAVE 
+# load_csv('data/acs2019_1yr_B08105A_16000US4805000/acs2019_1yr_B08105A_16000US4805000.csv',"ACSData", "ACS2019_commute")
