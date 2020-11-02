@@ -228,7 +228,7 @@ d3.json(geoData, function (data) {
   //Overlays that may be toggled on or off
   var overlayMaps = {
       'Real Estate Prices': geojson,
-      'All the places Cheryl felt the Hots for Deep': overlays
+      'Crime Data': overlays
   };
   L.control.layers(baseMaps, overlayMaps, {collapsed: false}).addTo(map);
 
